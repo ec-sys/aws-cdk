@@ -16,3 +16,7 @@ sudo cdk deploy \
  -c region=us-east-1 \
  -c environmentName=Staging \
  -c sslCertificateArn=arn:aws:acm:us-east-1:784965684233:certificate/3fcf5d22-125d-4904-90c0-bcfe5b5c38d0
+
+sudo cdk deploy \
+ --app "mvn -e -q compile exec:java \
+ -Dexec.mainClass=com.myorg.DockerRepositoryApp"
