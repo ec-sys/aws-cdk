@@ -9,3 +9,10 @@ https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html
 sudo cdk bootstrap aws://784965684233/us-east-1 -c accountId=784965684233 -c region=us-east-1
 
 sudo cdk destroy -c accountId=784965684233 -c region=us-east-1
+
+
+sudo cdk deploy \
+ -c accountId=784965684233 \
+ -c region=us-east-1 \
+ -c environmentName=Staging \
+ -c sslCertificateArn=arn:aws:acm:us-east-1:784965684233:certificate/3fcf5d22-125d-4904-90c0-bcfe5b5c38d0

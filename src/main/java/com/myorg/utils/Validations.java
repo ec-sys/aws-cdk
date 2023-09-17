@@ -1,4 +1,4 @@
-package com.myorg;
+package com.myorg.utils;
 
 public class Validations {
 
