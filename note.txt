@@ -1,0 +1,11 @@
+sudo cdk synth -c accountId=784965684233 -c region=us-east-1
+
+sudo cdk deploy -c accountId=784965684233 -c region=us-east-1
+sudo cdk ls -c accountId=784965684233 -c region=us-east-1
+
+sudo cdk bootstrap -c accountId=784965684233 -c region=us-east-1
+
+https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html
+sudo cdk bootstrap aws://784965684233/us-east-1 -c accountId=784965684233 -c region=us-east-1
+
+sudo cdk destroy -c accountId=784965684233 -c region=us-east-1
