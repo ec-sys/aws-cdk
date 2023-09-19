@@ -9,6 +9,7 @@
 
     <modules>
         <module>ias-cdk</module>
+		<module>todo-app</module>
     </modules>
 
 </project>
