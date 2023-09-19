@@ -12,9 +12,7 @@ public class AwsConfig {
 
     @Bean
     @ConditionalOnProperty(prefix = "custom", name = "use-cognito-as-identity-provider", havingValue = "true")
-    public CognitoIdentityProviderClient cognitoIdentityProviderClient(
-            AwsRegionProvider regionProvider,
-            AwsCredentialsProvider awsCredentialsProvider) {
+    public CognitoIdentityProviderClient cognitoIdentityProviderClient(AwsRegionProvider regionProvider, AwsCredentialsProvider awsCredentialsProvider) {
         return CognitoIdentityProviderClient.builder()
                 .credentialsProvider(awsCredentialsProvider)
                 .region(regionProvider.getRegion())
