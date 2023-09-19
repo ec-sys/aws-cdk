@@ -1,4 +1,4 @@
-package com.myorg.stacks;
+package com.myorg.aws_cdk.stacks;
 
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.Stack;

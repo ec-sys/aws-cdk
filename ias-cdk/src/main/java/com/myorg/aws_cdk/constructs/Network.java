@@ -1,4 +1,4 @@
-package com.myorg.constructs;
+package com.myorg.aws_cdk.constructs;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,14 +1,10 @@
-package com.myorg;
+package com.myorg.aws_cdk;
 
-import com.myorg.stacks.L1ConstructStack;
-import com.myorg.stacks.L2ConstructStack;
-import com.myorg.utils.EvnUtil;
-import com.myorg.utils.StringUtil;
+import com.myorg.aws_cdk.stacks.L1ConstructStack;
+import com.myorg.aws_cdk.stacks.L2ConstructStack;
+import com.myorg.aws_cdk.utils.EvnUtil;
 import software.amazon.awscdk.App;
-import software.amazon.awscdk.Environment;
 import software.amazon.awscdk.StackProps;
-
-import static com.myorg.utils.Validations.requireNonEmpty;
 
 public class AwsCdkApp {
 

@@ -1,4 +1,4 @@
-package com.myorg.utils;
+package com.myorg.aws_cdk.utils;
 
 public class Validations {
 

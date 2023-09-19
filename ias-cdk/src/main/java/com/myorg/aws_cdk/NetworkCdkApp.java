@@ -1,13 +1,13 @@
-package com.myorg;
+package com.myorg.aws_cdk;
 
-import com.myorg.constructs.Network;
-import com.myorg.utils.EvnUtil;
+import com.myorg.aws_cdk.constructs.Network;
+import com.myorg.aws_cdk.utils.EvnUtil;
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.Environment;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
 
-import static com.myorg.utils.Validations.requireNonEmpty;
+import static com.myorg.aws_cdk.utils.Validations.requireNonEmpty;
 
 public class NetworkCdkApp {
     public static void main(final String[] args) {

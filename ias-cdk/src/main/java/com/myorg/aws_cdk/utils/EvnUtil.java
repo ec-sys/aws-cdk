@@ -1,9 +1,9 @@
-package com.myorg.utils;
+package com.myorg.aws_cdk.utils;
 
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.Environment;
 
-import static com.myorg.utils.Validations.requireNonEmpty;
+import static com.myorg.aws_cdk.utils.Validations.requireNonEmpty;
 
 public class EvnUtil {
     public static Environment makeEnv(App app) {
