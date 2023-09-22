@@ -16,10 +16,10 @@ spring:
             issuerUri: http://localhost:8888/auth/realms/stratospheric
   thymeleaf:
     cache: false
-    prefix: file:src/main/resources/templates/
+#    prefix: file:src/main/resources/templates/
   web:
     resources:
-      static-locations: file:src/main/resources/static/
+#      static-locations: file:src/main/resources/static/
       cache:
         period: 0
   jpa:
