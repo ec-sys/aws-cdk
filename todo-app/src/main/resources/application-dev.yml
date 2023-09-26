@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/stratospheric
@@ -33,7 +33,7 @@ spring:
         access-key: bar
       endpoint: http://localhost:4566
       region:
-        static: eu-central-1
+        static: us-east-1
   activemq:
     password: admin
     user: admin
