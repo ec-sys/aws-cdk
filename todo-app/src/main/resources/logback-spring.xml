@@ -21,5 +21,7 @@
     <logger name="org.springframework.messaging.simp.stomp.StompBrokerRelayMessageHandler" level="INFO"/>
     <logger name="org.springframework.web.SimpLogging" level="INFO"/>
     <logger name="org.springframework.web.socket.config.WebSocketMessageBrokerStats" level="WARN"/>
+    <logger name="software.amazon.awssdk" level="WARN" />
+    <logger name="software.amazon.awssdk.request" level="DEBUG" />
   </springProfile>
 </configuration>

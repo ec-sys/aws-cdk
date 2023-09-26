@@ -10,7 +10,9 @@ import software.amazon.awssdk.enhanced.dynamodb.Expression;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryEnhancedRequest;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.DescribeTableRequest;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -24,14 +26,24 @@ public class TraceDao {
 
     private final DynamoDbTemplate dynamoDbTemplate;
 
-    public TraceDao(DynamoDbTemplate dynamoDbTemplate) {
+    private final DynamoDbClient dynamoDbClient;
+
+    public TraceDao(DynamoDbTemplate dynamoDbTemplate, DynamoDbClient dynamoDbClient) {
         this.dynamoDbTemplate = dynamoDbTemplate;
+        this.dynamoDbClient = dynamoDbClient;
     }
 
     @Async
     @EventListener(TracingEvent.class)
     public void storeTracingEvent(TracingEvent tracingEvent) {
-        Breadcrumb breadcrumb = new Breadcrumb();
+        var test = dynamoDbClient.listTables();
+        test.tableNames();
+        DescribeTableRequest request = DescribeTableRequest.builder().tableName("todo_breadcrumbs").build();
+        var response = dynamoDbClient.describeTable(request);
+        response.table().hasReplicas();
+
+
+        TodoBreadcrumb breadcrumb = new TodoBreadcrumb();
         breadcrumb.setId(UUID.randomUUID().toString());
         breadcrumb.setUri(tracingEvent.getUri());
         breadcrumb.setUsername(tracingEvent.getUsername());
@@ -42,8 +54,8 @@ public class TraceDao {
         LOG.info("Successfully stored breadcrumb trace");
     }
 
-    public List<Breadcrumb> findAllEventsForUser(String username) {
-        Breadcrumb breadcrumb = new Breadcrumb();
+    public List<TodoBreadcrumb> findAllEventsForUser(String username) {
+        TodoBreadcrumb breadcrumb = new TodoBreadcrumb();
         breadcrumb.setUsername(username);
 
         return dynamoDbTemplate.query(
@@ -58,16 +70,16 @@ public class TraceDao {
                                 )
                         )
                         .build(),
-                Breadcrumb.class
+                TodoBreadcrumb.class
         ).items()
                 .stream()
                 .collect(Collectors.toList());
     }
 
-    public List<Breadcrumb> findUserTraceForLastTwoWeeks(String username) {
+    public List<TodoBreadcrumb> findUserTraceForLastTwoWeeks(String username) {
         ZonedDateTime twoWeeksAgo = ZonedDateTime.now().minusWeeks(2);
 
-        Breadcrumb breadcrumb = new Breadcrumb();
+        TodoBreadcrumb breadcrumb = new TodoBreadcrumb();
         breadcrumb.setUsername(username);
 
         return dynamoDbTemplate.query(
@@ -94,7 +106,7 @@ public class TraceDao {
                                         .build()
                         )
                         .build(),
-                Breadcrumb.class
+                TodoBreadcrumb.class
         )
                 .items()
                 .stream()

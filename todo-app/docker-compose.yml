@@ -17,7 +17,7 @@ services:
       - 61614:61614
       - 61616:61616
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:2.1.0
     ports:
       - 4566:4566
       - 8000:8000
@@ -26,6 +26,8 @@ services:
       - 4572:4572
     environment:
       - SERVICES=sns,sqs,ses,dynamodb
+      - DEBUG=1
+      - LS_LOG=trace
     volumes:
       - ./src/test/resources/localstack/local-aws-infrastructure.sh:/docker-entrypoint-initaws.d/init.sh
   keycloak:
