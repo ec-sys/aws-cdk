@@ -57,8 +57,8 @@ public class AmazonDynamoDBConfig {
     public DynamoDbTemplate dynamoDbTemplate() {
         DynamoDbTableNameResolver nameResolver = dynamoDbTableNameResolver();
         DynamoDbTableSchemaResolver schemaResolver = dynamoDbTableSchemaResolver();
-        // return new DynamoDbTemplate(dynamoDbEnhancedClient(), schemaResolver, nameResolver);
-        return new DynamoDbTemplate(dynamoDbEnhancedClient());
+        return new DynamoDbTemplate(dynamoDbEnhancedClient(), schemaResolver, nameResolver);
+        // return new DynamoDbTemplate(dynamoDbEnhancedClient());
     }
 
     @Bean
