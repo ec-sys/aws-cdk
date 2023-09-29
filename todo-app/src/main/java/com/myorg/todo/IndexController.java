@@ -1,8 +1,8 @@
 package com.myorg.todo;
 
 import com.myorg.todo.tracing.TracingEvent;
+import com.myorg.todo.utils.PrincipalUtil;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ public class IndexController {
                 new TracingEvent(
                         this,
                         "index",
-                        principal != null ? principal.getName() : "anonymous"
+                        principal != null ? PrincipalUtil.getEmailOfLoginUser(principal) : "anonymous"
                 )
         );
 

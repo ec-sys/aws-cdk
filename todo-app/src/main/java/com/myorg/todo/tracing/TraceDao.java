@@ -10,9 +10,7 @@ import software.amazon.awssdk.enhanced.dynamodb.Expression;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryEnhancedRequest;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-import software.amazon.awssdk.services.dynamodb.model.DescribeTableRequest;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -26,21 +24,13 @@ public class TraceDao {
 
     private final DynamoDbTemplate dynamoDbTemplate;
 
-    private final DynamoDbClient dynamoDbClient;
-
-    public TraceDao(DynamoDbTemplate dynamoDbTemplate, DynamoDbClient dynamoDbClient) {
+    public TraceDao(DynamoDbTemplate dynamoDbTemplate) {
         this.dynamoDbTemplate = dynamoDbTemplate;
-        this.dynamoDbClient = dynamoDbClient;
     }
 
     @Async
     @EventListener(TracingEvent.class)
     public void storeTracingEvent(TracingEvent tracingEvent) {
-        DescribeTableRequest request = DescribeTableRequest.builder().tableName("todo_breadcrumbs").build();
-        var response = dynamoDbClient.describeTable(request);
-        response.table().hasReplicas();
-
-
         TodoBreadcrumb breadcrumb = new TodoBreadcrumb();
         breadcrumb.setId(UUID.randomUUID().toString());
         breadcrumb.setUri(tracingEvent.getUri());
