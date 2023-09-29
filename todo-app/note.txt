@@ -78,4 +78,18 @@ aws --endpoint-url=http://localhost:4566 dynamodb get-item --table-name todo_bre
 
 aws --endpoint-url=http://localhost:4566 dynamodb delete-table --table-name todo_breadcrumbs
 
-awsl --endpoint-url=http://localhost:4566 dynamodb list-tables --region us-east-1
+aws --endpoint-url=http://localhost:4566 dynamodb list-tables --region us-east-1
+
+aws --endpoint-url=http://localhost:4566 sqs list-queues --region us-east-1
+
+aws --endpoint-url=http://localhost:4566 dynamodb sqs receive-message --queue-url http://localhost:4566/000000000000/stratospheric-todo-sharing
+
+
+mvn spring-boot:run -Dspring-boot.run.profiles=dev -Dspring-boot.run.arguments=--server.port=8085
+aws ses verify-email-identity --email-address noreply@stratospheric.dev --endpoint-url=http://localhost:4566
+
+aws ses verify-email-identity --email-address noreply@stratospheric.dev --endpoint-url=http://localhost:4566
+aws ses verify-email-identity --email-address info@stratospheric.dev --endpoint-url=http://localhost:4566
+aws ses verify-email-identity --email-address tom@stratospheric.dev --endpoint-url=http://localhost:4566
+aws ses verify-email-identity --email-address bjoern@stratospheric.dev --endpoint-url=http://localhost:4566
+aws ses verify-email-identity --email-address philip@stratospheric.dev --endpoint-url=http://localhost:4566
