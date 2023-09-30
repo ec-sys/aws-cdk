@@ -93,3 +93,11 @@ aws ses verify-email-identity --email-address info@stratospheric.dev --endpoint-
 aws ses verify-email-identity --email-address tom@stratospheric.dev --endpoint-url=http://localhost:4566
 aws ses verify-email-identity --email-address bjoern@stratospheric.dev --endpoint-url=http://localhost:4566
 aws ses verify-email-identity --email-address philip@stratospheric.dev --endpoint-url=http://localhost:4566
+
+
+-----------------
+mvn package -Dmaven.test.skip
+docker build --tag longdd90jp/aws-esc:todo-app.1.0 .
+
+docker build --tag longdd90jp/aws-esc:zenblog-api.1.0 .
+docker run --name ecs-api -it --rm -p 8080:8080 longdd90jp/aws-esc:zenblog-api.1.0

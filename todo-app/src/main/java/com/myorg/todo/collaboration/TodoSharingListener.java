@@ -53,7 +53,11 @@ public class TodoSharingListener {
                         payload.getToken()
                 )
         );
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        } catch (Exception ex) {
+            LOG.error("SEND MAIL FROM EXCEPTION : {}-{}", confirmEmailFromAddress, ex.getMessage());
+        }
 
         LOG.info("Successfully informed collaborator about shared todo.");
 
