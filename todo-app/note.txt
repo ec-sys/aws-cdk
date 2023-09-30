@@ -101,3 +101,6 @@ docker build --tag longdd90jp/aws-esc:todo-app.1.0 .
 
 docker build --tag longdd90jp/aws-esc:zenblog-api.1.0 .
 docker run --name ecs-api -it --rm -p 8080:8080 longdd90jp/aws-esc:zenblog-api.1.0
+
+root
+admin12345
