@@ -104,3 +104,10 @@ docker run --name ecs-api -it --rm -p 8080:8080 longdd90jp/aws-esc:zenblog-api.1
 
 root
 admin12345
+
+https://<your_domain>/login?response_type=code&client_id=<your_app_client_id>&redirect_uri=<your_callback_url>
+
+https://dangtit90.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=1r6ninjt34cv32epb6qnc6hhqb&redirect_uri=http://localhost:8080/login/oauth2/code/cognito
+https://dangtit90.auth.us-east-1.amazoncognito.com/logout?response_type=code&client_id=1r6ninjt34cv32epb6qnc6hhqb&redirect_uri=http://localhost:8080
+   state=STATE&
+   scope=openid+profile+aws.cognito.signin.user.admin
