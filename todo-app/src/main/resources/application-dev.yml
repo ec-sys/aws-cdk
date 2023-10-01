@@ -10,19 +10,18 @@ spring:
       client:
         registration:
           cognito:
-            clientId: 1r6ninjt34cv32epb6qnc6hhqb
-            clientSecret: udh7163u697s9t7eq6q2ktnb165e1887rhseg0g2t0nsvbd8lvs
-            scope: openid, profile, email
-            clientName: todo-spring-boot
+            clientId: spring-boot-application
+            clientSecret: 27b07baf-53ba-42c6-b11f-6384769cada3
+            scope: openid
         provider:
           cognito:
-            issuerUri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4
+            issuerUri: http://localhost:8888/auth/realms/stratospheric
   thymeleaf:
     cache: false
-  #    prefix: file:src/main/resources/templates/
+#    prefix: file:src/main/resources/templates/
   web:
     resources:
-      #      static-locations: file:src/main/resources/static/
+#      static-locations: file:src/main/resources/static/
       cache:
         period: 0
   jpa:
@@ -30,8 +29,8 @@ spring:
   cloud:
     aws:
       credentials:
-        secret-key: AKIA3NQ4ZZQEUWDDJ4OA
-        access-key: JKV5Yh+63BIHTpUOrWh4bv9gq37w2/CAtOKM8YdW
+        secret-key: foo
+        access-key: bar
       endpoint: http://localhost:4566
       region:
         static: us-east-1
@@ -50,5 +49,5 @@ custom:
   web-socket-relay-use-ssl: false
   auto-confirm-collaborations: true
   provide-test-todo-controller: true
-  use-cognito-as-identity-provider: true
+  use-cognito-as-identity-provider: false
   environment: local

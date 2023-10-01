@@ -1,29 +1,20 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/stratospheric
-    username: ${DB_USER_NAME:stratospheric}
-    password: ${DB_PASSWORD:stratospheric}
   security:
     oauth2:
       client:
         registration:
           cognito:
-            clientId: ${COGNITO_CLIENT_ID:1r6ninjt34cv32epb6qnc6hhqb}
-            clientSecret: ${COGNITO_CLIENT_SECRET:udh7163u697s9t7eq6q2ktnb165e1887rhseg0g2t0nsvbd8lvs}
+            clientId: ${COGNITO_CLIENT_ID}
+            clientSecret: ${COGNITO_CLIENT_SECRET}
             scope: openid, profile, email
-            clientName: todo-spring-boot
+            clientName: stratospheric-users-client
         provider:
           cognito:
-            issuerUri: ${COGNITO_PROVIDER_URL:https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4}
+            issuerUri: ${COGNITO_PROVIDER_URL}
   activemq:
-    broker-url: ${WEB_SOCKET_RELAY_ENDPOINT:localhost:61613}
-    user: ${WEB_SOCKET_RELAY_USERNAME:admin}
-    password: ${WEB_SOCKET_RELAY_PASSWORD:admin}
-  cloud:
-    aws:
-      credentials:
-        secret-key: AKIA3NQ4ZZQEUWDDJ4OA
-        access-key: JKV5Yh+63BIHTpUOrWh4bv9gq37w2/CAtOKM8YdW
+    broker-url: ${WEB_SOCKET_RELAY_ENDPOINT}
+    user: ${WEB_SOCKET_RELAY_USERNAME}
+    password: ${WEB_SOCKET_RELAY_PASSWORD}
 
 management:
   cloudwatch:
@@ -33,6 +24,6 @@ management:
 
 custom:
   sharing-queue: ${TODO_SHARING_QUEUE_NAME}
-  web-socket-relay-use-ssl: false
+  web-socket-relay-use-ssl: true
   provide-test-todo-controller: false
   use-cognito-as-identity-provider: true
