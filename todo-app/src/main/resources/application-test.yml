@@ -30,15 +30,15 @@ spring:
   cloud:
     aws:
       credentials:
-        secret-key: foo
-        access-key: bar
+        secret-key: ${SECRET_KEY:foo}
+        access-key: ${ACCESS_KEY:bar}
       endpoint: http://localhost:4566
       region:
         static: us-east-1
   activemq:
-    password: admin
-    user: admin
-    broker-url: localhost:61613
+    password: ${MQ_PASSWORD:admin}
+    user: ${MQ_USER:admin}
+    broker-url: ${MQ_BROKER_URL:localhost:61613}
 
 management:
   cloudwatch:
@@ -47,8 +47,12 @@ management:
         enabled: false
 
 custom:
-  web-socket-relay-use-ssl: false
-  auto-confirm-collaborations: true
-  provide-test-todo-controller: true
+#  web-socket-relay-use-ssl: false
+#  auto-confirm-collaborations: true
+#  provide-test-todo-controller: true
+#  use-cognito-as-identity-provider: true
+#  environment: local
+  sharing-queue: ${TODO_SHARING_QUEUE_NAME:stratospheric-todo-sharing}
+  web-socket-relay-use-ssl: true
+  provide-test-todo-controller: false
   use-cognito-as-identity-provider: true
-  environment: local
