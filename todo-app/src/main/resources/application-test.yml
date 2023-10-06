@@ -5,18 +5,29 @@ spring:
     url: jdbc:postgresql://localhost:5432/stratospheric
     username: stratospheric
     password: stratospheric
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          cognito:
+#            clientId: 1r6ninjt34cv32epb6qnc6hhqb
+#            clientSecret: udh7163u697s9t7eq6q2ktnb165e1887rhseg0g2t0nsvbd8lvs
+#            scope: openid,profile,email
+#            clientName: todo-spring-boot
+#        provider:
+#          cognito:
+#            issuerUri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4
   security:
     oauth2:
       client:
         registration:
           cognito:
-            clientId: 1r6ninjt34cv32epb6qnc6hhqb
-            clientSecret: udh7163u697s9t7eq6q2ktnb165e1887rhseg0g2t0nsvbd8lvs
-            scope: openid,profile,email
-            clientName: todo-spring-boot
+            clientId: spring-boot-application
+            clientSecret: 27b07baf-53ba-42c6-b11f-6384769cada3
+            scope: openid
         provider:
           cognito:
-            issuerUri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4
+            issuerUri: http://localhost:8888/auth/realms/stratospheric
   thymeleaf:
     cache: false
 #    prefix: file:src/main/resources/templates/
@@ -35,6 +46,12 @@ spring:
       endpoint: http://localhost:4566
       region:
         static: us-east-1
+      sqs:
+        endpoint: http://localhost:4566
+#        endpoint: https://sqs.us-east-1.amazonaws.com/784965684233
+      dynamodb:
+        endpoint: http://localhost:4566
+#        endpoint: https://dynamodb.us-east-1.amazonaws.com
   activemq:
     password: ${MQ_PASSWORD:admin}
     user: ${MQ_USER:admin}
@@ -53,6 +70,6 @@ custom:
 #  use-cognito-as-identity-provider: true
 #  environment: local
   sharing-queue: ${TODO_SHARING_QUEUE_NAME:stratospheric-todo-sharing}
-  web-socket-relay-use-ssl: true
+  web-socket-relay-use-ssl: false
   provide-test-todo-controller: false
-  use-cognito-as-identity-provider: true
+  use-cognito-as-identity-provider: false

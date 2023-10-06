@@ -104,3 +104,15 @@ docker run --name ecs-api -it --rm -p 8080:8080 longdd90jp/aws-esc:zenblog-api.1
 
 root
 admin12345
+
+
+aws s3api list-buckets --region us-east-1
+
+aws dynamodb list-tables --region us-east-1
+
+aws sqs list-queues --region us-east-1
+
+
+aws sqs list-queues --region us-east-1 --endpoint-url https://vpce-0c42fa1a9c2e407d2-nt7m78dy.sqs.us-east-1.vpce.amazonaws.com
+
+aws ses list-identities --region us-east-1 --endpoint-url https://email-smtp.us-east-1.amazonaws.com
