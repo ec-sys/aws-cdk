@@ -70,15 +70,14 @@ public class TodoSharingListener {
 
     private String getBodyTemplate() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Hi %s");
-        builder.append("someone shared a Todo from %s with you.");
-        builder.append("Information about the shared Todo item:");
-        builder.append("Title: %s");
-        builder.append("Description: %s");
-        builder.append("Priority: %s");
-        builder.append("You can accept the collaboration by clicking this link: %s/todo/%s/collaborations/%s/confirm?token=%s");
-        builder.append("Kind regards,");
-        builder.append("Stratospheric");
+        builder.append("Hi %s\n\n");
+        builder.append("Someone shared a Todo from %s with you.\n");
+        builder.append("Information about the shared Todo item:\n");
+        builder.append("Title: %s\n");
+        builder.append("Description: %s\n");
+        builder.append("Priority: %s\n");
+        builder.append("You can accept the collaboration by clicking this link: %s/todo/%s/collaborations/%s/confirm?token=%s\n\n");
+        builder.append("Kind regards,Stratospheric");
 
         return builder.toString();
     }

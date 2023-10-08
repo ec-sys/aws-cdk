@@ -33,6 +33,8 @@ spring:
         endpoint: https://sqs.us-east-1.amazonaws.com/784965684233
       dynamodb:
         endpoint: https://dynamodb.us-east-1.amazonaws.com
+      ses:
+        endpoint: https://email.us-east-1.amazonaws.com
   activemq:
     password: ${MQ_PASSWORD:admin}
     user: ${MQ_USER:admin}
@@ -42,10 +44,12 @@ management:
   cloudwatch:
     metrics:
       export:
-        enabled: false # disabled to save some $$$ on our monthly AWS bill
+        enabled: false
 
 custom:
   sharing-queue: ${TODO_SHARING_QUEUE_NAME:stratospheric-todo-sharing}
-  web-socket-relay-use-ssl: true
+  auto-confirm-collaborations: true
+  web-socket-relay-use-ssl: false
   provide-test-todo-controller: false
   use-cognito-as-identity-provider: true
+  confirm-email-from-address: ${NO_REPLY_EMAIL:noreply@stratospheric.dev}
