@@ -8,6 +8,12 @@
     <encoder class="de.siegmar.logbackawslogsjsonencoder.AwsJsonLogEncoder"/>
   </appender>
 
+  <springProfile name="ec2">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </springProfile>
+
   <springProfile name="dev">
     <root level="INFO">
       <appender-ref ref="CONSOLE"/>

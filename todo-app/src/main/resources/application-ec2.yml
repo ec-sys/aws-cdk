@@ -38,7 +38,7 @@ spring:
   activemq:
     password: ${MQ_PASSWORD:admin}
     user: ${MQ_USER:admin}
-    broker-url: ${MQ_BROKER_URL:localhost:61613}
+    broker-url: ${MQ_BROKER_URL:localhost}:${MQ_BROKER_PORT:61613}
 
 management:
   cloudwatch:

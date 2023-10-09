@@ -116,3 +116,58 @@ aws sqs list-queues --region us-east-1
 aws sqs list-queues --region us-east-1 --endpoint-url https://vpce-0c42fa1a9c2e407d2-nt7m78dy.sqs.us-east-1.vpce.amazonaws.com
 
 aws ses list-identities --region us-east-1 --endpoint-url https://email-smtp.us-east-1.amazonaws.com
+
+sudo nano ~/.profile
+source ~/.profile
+
+# setting db
+export DB_HOST="todo-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com"
+export DB_USER_NAME="todo"
+export DB_PASSWORD="root12345"
+
+# setting cognito
+export COGNITO_CLIENT_ID="1r6ninjt34cv32epb6qnc6hhqb"
+export COGNITO_CLIENT_SECRET="udh7163u697s9t7eq6q2ktnb165e1887rhseg0g2t0nsvbd8lvs"
+export COGNITO_CLIENT_NAME="todo-spring-boot"
+export COGNITO_PROVIDER_URL="https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4"
+export COGNITO_LOGOUT_URL="https://dangtit90.auth.us-east-1.amazoncognito.com/logout?response_type=code&client_id=1r6ninjt34cv32epb6qnc6hhqb"
+export COGNITO_USER_POOL_ID="us-east-1_T7GTAxqF4"
+
+# setting other
+export TODO_SHARING_QUEUE_NAME="stratospheric-todo-sharing"
+export NO_REPLY_EMAIL="noreply@stratospheric.dev"
+export ACTIVE_PROFILE="ec2"
+
+# mqtt
+export MQ_USER="admin"
+export MQ_PASSWORD="admin"
+export MQ_BROKER_URL="localhost"
+export MQ_BROKER_PORT="8161"
+
+java -jar -Dspring.profiles.active=ec2 app.jar
+
+sudo aws s3 cp s3://dangtit90/todo-app-0.0.1-SNAPSHOT.jar app.jar
+
+psql -h myhost -d mydb -U myuser
+psql -h todo-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com -d todo-db -U root
+psql -h todo-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com -U todo
+psql -h todo-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com -d postgres -U todo
+psql -h todo-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com -d stratospheric -U todo
+root12345
+
+https://www.tutsmake.com/how-to-install-apache-activemq-on-ubuntu-22-04/
+
+100,000,000
+
+sudo psql -h todo-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com -U todo  -c 'create database stratospheric;'
+
+https://dangtit90.auth.us-east-1.amazoncognito.com/logout?response_type=code&client_id=1r6ninjt34cv32epb6qnc6hhqb
+
+
+wget https://dlcdn.apache.org//activemq/5.17.0/apache-activemq-5.17.0-bin.tar.gz
+
+wget http://archive.apache.org/dist/activemq/5.17.0/apache-activemq-5.17.0-bin.tar.gz
+
+tar xzf apache-activemq-5.17.0-bin.tar.gz -C /opt
+
+tar xzf apache-activemq-5.17.0-bin.tar.gz -C /opt
