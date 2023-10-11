@@ -9,13 +9,13 @@ services:
       - POSTGRES_USER=stratospheric
       - POSTGRES_PASSWORD=stratospheric
       - POSTGRES_DB=stratospheric
-  #  activemq:
-  #    image: stratospheric/activemq-docker-image
-  #    ports:
-  #      - 5672:5672
-  #      - 61613:61613
-  #      - 61614:61614
-  #      - 61616:61616
+#  activemq:
+#    image: stratospheric/activemq-docker-image
+#    ports:
+#      - 5672:5672
+#      - 61613:61613
+#      - 61614:61614
+#      - 61616:61616
   rabbitmq:
     image: longdd90jp/rabbitmq:1.0
     ports:
@@ -45,6 +45,5 @@ services:
       - KEYCLOAK_PASSWORD=keycloak
       - DB_VENDOR=h2
       - JAVA_OPTS=-Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/stratospheric-realm.json
-#      - KEYCLOAK_IMPORT=/tmp/stratospheric-realm.json
     volumes:
       - ./src/test/resources/keycloak/stratospheric-realm.json:/tmp/stratospheric-realm.json
