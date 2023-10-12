@@ -171,3 +171,5 @@ wget http://archive.apache.org/dist/activemq/5.17.0/apache-activemq-5.17.0-bin.t
 tar xzf apache-activemq-5.17.0-bin.tar.gz -C /opt
 
 tar xzf apache-activemq-5.17.0-bin.tar.gz -C /opt
+
+https://viblo.asia/p/tao-ung-dung-chat-don-gian-voi-spring-boot-va-websocket-naQZR1DjKvx
