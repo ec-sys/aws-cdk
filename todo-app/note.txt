@@ -139,10 +139,11 @@ export NO_REPLY_EMAIL="noreply@stratospheric.dev"
 export ACTIVE_PROFILE="ec2"
 
 # mqtt
-export MQ_USER="admin"
-export MQ_PASSWORD="admin"
+export MQ_USER="guest"
+export MQ_PASSWORD="guest"
 export MQ_BROKER_URL="localhost"
 export MQ_BROKER_PORT="8161"
+export NO_REPLY_EMAIL="longthientai90@gmail.com"
 
 java -jar -Dspring.profiles.active=ec2 app.jar
 
