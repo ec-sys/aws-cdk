@@ -113,7 +113,7 @@ aws dynamodb list-tables --region us-east-1
 aws sqs list-queues --region us-east-1
 
 
-aws sqs list-queues --region us-east-1 --endpoint-url https://vpce-0c42fa1a9c2e407d2-nt7m78dy.sqs.us-east-1.vpce.amazonaws.com
+aws sqs list-queues --region us-east-1 --endpoint-url https://vpce-08e4e4f1ef19271ad-v51vi33l.sqs.us-east-1.vpce.amazonaws.com
 
 aws ses list-identities --region us-east-1 --endpoint-url https://email-smtp.us-east-1.amazonaws.com
 
