@@ -33,7 +33,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(httpRequests -> httpRequests
                         .requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/register").permitAll()
+                        .requestMatchers("/", "/register", "/chat").permitAll()
                         .anyRequest().authenticated())
                 .logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler));
 

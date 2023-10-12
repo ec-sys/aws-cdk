@@ -118,7 +118,9 @@ public class TodoCollaborationService {
                 + ".";
         String ownerEmail = collaborationRequest.getTodo().getOwner().getEmail();
 
-        simpMessagingTemplate.convertAndSend("/topic/todoUpdates/" + ownerEmail, subject + " " + message);
+        //simpMessagingTemplate.convertAndSend("/topic/todoUpdates/" + ownerEmail, subject + " " + message);
+        // simpMessagingTemplate.convertAndSend("/topic/todoUpdates", subject + " " + message);
+        simpMessagingTemplate.convertAndSendToUser("707755d4-a71a-4d1e-85ba-b0c5d84c3fd5", "/topic/todoUpdates", subject + " " + message);
 
         LOG.info("Successfully informed owner about accepted request.");
 

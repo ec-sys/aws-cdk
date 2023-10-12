@@ -4,18 +4,19 @@ function connectToWebSocketEndpoint(email) {
   const socket = new SockJS('/websocket');
 
   stompClient = Stomp.over(socket);
-  stompClient.connect({}, () => {
+  stompClient.connect({}, function(frame) {
     stompClient.subscribe('/topic/todoUpdates', function (message) {
+      console.log(message.body);
       $('#message').html(message.body);
       $('#toast').toast('show');
     });
 
-    if (email) {
-      stompClient.subscribe('/topic/todoUpdates/' + email, function (message) {
-        $('#message').html(message.body);
-        $('#toast').toast('show');
-      });
-    }
+//    if (email) {
+//      stompClient.subscribe('/topic/todoUpdates/' + email, function (message) {
+//        $('#message').html(message.body);
+//        $('#toast').toast('show');
+//      });
+//    }
   });
 }
 

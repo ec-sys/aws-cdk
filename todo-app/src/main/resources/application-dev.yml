@@ -34,7 +34,7 @@ spring:
       endpoint: http://localhost:4566
       region:
         static: us-east-1
-  activemq:
+  broker:
     password: admin
     user: admin
     broker-url: localhost:61613
