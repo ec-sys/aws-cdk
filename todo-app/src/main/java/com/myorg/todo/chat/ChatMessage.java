@@ -1,37 +1,23 @@
 package com.myorg.todo.chat;
 
+import com.myorg.todo.utils.StringUtils;
+import lombok.Data;
+
+@Data
 public class ChatMessage {
-    private MessageType type;
-    private String content;
-    private String sender;
+    private String from;
+    private String text;
+    private String recipient;
+    private String time;
 
-    public enum MessageType {
-        CHAT,
-        JOIN,
-        LEAVE
+    public ChatMessage() {
+
     }
 
-    public MessageType getType() {
-        return type;
-    }
-
-    public void setType(MessageType type) {
-        this.type = type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
+    public ChatMessage(String from, String text, String recipient) {
+        this.from = from;
+        this.text = text;
+        this.recipient = recipient;
+        this.time = StringUtils.getCurrentTimeStamp();
     }
 }

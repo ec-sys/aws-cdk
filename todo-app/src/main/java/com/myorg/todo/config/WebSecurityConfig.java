@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -27,16 +28,23 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(csrf -> csrf.ignoringRequestMatchers(
                         "/stratospheric-todo-updates/**",
-                        "/websocket/**"
+                        "/websocket/**",
+                        "/chat/**",
+                        "/broadcast/**"
                 ))
                 .oauth2Login(withDefaults())
                 .authorizeHttpRequests(httpRequests -> httpRequests
                         .requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/register", "/chat").permitAll()
+                        .requestMatchers("/", "/register", "/chat/**", "/chat-app", "/rest/**").permitAll()
                         .anyRequest().authenticated())
                 .logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler));
 
         return httpSecurity.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/rest/**");
     }
 }

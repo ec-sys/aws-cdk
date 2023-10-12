@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.util.Objects;
+
 class LoggingContextInterceptor implements HandlerInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(LoggingContextInterceptor.class);
@@ -21,8 +23,10 @@ class LoggingContextInterceptor implements HandlerInterceptor {
             final Object handler) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = getUserIdFromPrincipal(authentication.getPrincipal());
-        MDC.put("userId", userId);
+        if(Objects.nonNull(authentication)) {
+            String userId = getUserIdFromPrincipal(authentication.getPrincipal());
+            MDC.put("userId", userId);
+        }
         return true;
     }
 

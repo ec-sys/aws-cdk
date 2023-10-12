@@ -1,20 +1,12 @@
 package com.myorg.todo.config.websocket;
 
-import com.myorg.todo.chat.ChatMessage;
-import com.myorg.todo.config.old.WebSocketConfigOld;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.messaging.SessionConnectedEvent;
-import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 @Configuration
 @EnableWebSocketMessageBroker
@@ -30,12 +22,18 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setRelayPort(5673)
                 .setClientLogin("guest")
                 .setClientPasscode("guest");
+        config.setUserDestinationPrefix("/user");  // this is optional
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry
-                .addEndpoint("/websocket").addInterceptors(new HttpHandshakeInterceptor())
-                .withSockJS();
+        registry.addEndpoint("/websocket").withSockJS();
+        registry.addEndpoint("/broadcast").withSockJS();
+        registry.addEndpoint("/chat").withSockJS();
+    }
+
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        registration.interceptors(new UserInterceptor());
     }
 }

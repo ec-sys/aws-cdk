@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import java.security.Principal;
 import java.util.Objects;
 
-public class PrincipalUtil {
+public class PrincipalUtils {
 
     public static String getEmailOfLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
