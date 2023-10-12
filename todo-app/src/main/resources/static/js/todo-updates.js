@@ -4,8 +4,8 @@ function connectToWebSocketEndpoint(email) {
   const socket = new SockJS('/websocket');
 
   stompClient = Stomp.over(socket);
-  stompClient.connect({}, function(frame) {
-    stompClient.subscribe('/topic/todoUpdates', function (message) {
+  stompClient.connect({username: email}, function(frame) {
+    stompClient.subscribe('/user/queue/todo-updates', function (message) {
       console.log(message.body);
       $('#message').html(message.body);
       $('#toast').toast('show');

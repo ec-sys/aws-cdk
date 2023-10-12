@@ -9,19 +9,12 @@ services:
       - POSTGRES_USER=stratospheric
       - POSTGRES_PASSWORD=stratospheric
       - POSTGRES_DB=stratospheric
-#  rabbitmq:
-#    image: longdd90jp/rabbitmq:1.0
-#    ports:
-#      - 5672:5672
-#      - 15672:15672
-#      - 5673:61613
-  activemq:
-    image: apache/activemq-artemis:2.31.0
+  rabbitmq:
+    image: longdd90jp/rabbitmq:1.0
     ports:
-#      - 5672:5672
-      - 5674:61613
-#      - 61614:61614
-#      - 61616:61616
+      - 5672:5672
+      - 15672:15672
+      - 5673:61613
   localstack:
     image: localstack/localstack:2.1.0
     ports:
