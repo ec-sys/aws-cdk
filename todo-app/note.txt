@@ -114,6 +114,7 @@ aws sqs list-queues --region us-east-1
 
 
 aws sqs list-queues --region us-east-1 --endpoint-url https://vpce-08e4e4f1ef19271ad-v51vi33l.sqs.us-east-1.vpce.amazonaws.com
+private subnet
 
 aws ses list-identities --region us-east-1 --endpoint-url https://email-smtp.us-east-1.amazonaws.com
 

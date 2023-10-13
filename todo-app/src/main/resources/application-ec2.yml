@@ -30,11 +30,11 @@ spring:
       region:
         static: us-east-1
       sqs:
-        endpoint: https://sqs.us-east-1.amazonaws.com/784965684233
+        endpoint: ${AWS_SQS_ENDPOINT:https://sqs.us-east-1.amazonaws.com/784965684233}
       dynamodb:
-        endpoint: https://dynamodb.us-east-1.amazonaws.com
+        endpoint: ${AWS_DYNAMODB_ENDPOINT:https://dynamodb.us-east-1.amazonaws.com}
       ses:
-        endpoint: https://email.us-east-1.amazonaws.com
+        endpoint: ${AWS_SES_ENDPOINT:https://email.us-east-1.amazonaws.com}
   activemq:
     password: ${MQ_PASSWORD:admin}
     user: ${MQ_USER:admin}
