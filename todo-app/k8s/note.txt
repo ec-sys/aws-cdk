@@ -3,3 +3,30 @@ kubectl create namespace todo-app
 kubectl apply -f db-persistent.yaml -n todo-app
 
 https://www.airplane.dev/blog/deploy-postgres-on-kubernetes
+
+kubectl apply -f postgres-config.yaml -n todo-app
+kubectl apply -f postgres-deployment.yaml -n todo-app
+kubectl apply -f postgres-persistent.yaml -n todo-app
+kubectl apply -f postgres-persistent.yaml -n todo-app
+
+kubectl apply -f localstack-config.yaml -n todo-app
+kubectl apply -f localstack-deployment.yaml -n todo-app
+
+kubectl apply -f keycloak-config.yaml -n todo-app
+kubectl apply -f keycloak-deployment.yaml -n todo-app
+
+kubectl apply -f todo-ingress.yaml -n todo-app
+
+kubectl expose service keycloak --port=8080 --target-port=8080 -n todo-app
+
+kubectl port-forward service/keycloak 8080:8080 -n todo-app
+
+minikube service keycloak --url  -n todo-app
+
+
+kubectl port-forward service/keycloak 8080:8080 -n todo-app
+
+kubectl apply -f sample-deployment.yaml -n todo-app
+
+
+kubectl logs todo-app-77dbd6d487-vdkfz --all-containers=true -n todo-app

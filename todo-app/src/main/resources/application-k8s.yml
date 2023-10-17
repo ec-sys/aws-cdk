@@ -1,10 +1,10 @@
 server:
-  port: 8085
+  port: ${SERVER_PORT:8080}
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/stratospheric
-    username: stratospheric
-    password: stratospheric
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/stratospheric
+    username: ${DB_USER_NAME:root}
+    password: ${DB_PASSWORD:root12345}
   security:
     oauth2:
       client:
@@ -15,7 +15,7 @@ spring:
             scope: openid
         provider:
           cognito:
-            issuerUri: http://localhost:8080/realms/stratospheric
+            issuerUri: ${COGNITO_PROVIDER_URL:http://localhost:8080/auth/realms/stratospheric}
   thymeleaf:
     cache: false
 #    prefix: file:src/main/resources/templates/
@@ -31,13 +31,9 @@ spring:
       credentials:
         secret-key: foo
         access-key: bar
-      endpoint: http://localhost:4566
+      endpoint: http://${AWS_END_POINT:localhost}:4566
       region:
         static: us-east-1
-  broker:
-    password: admin
-    user: admin
-    broker-url: localhost:61613
 
 management:
   cloudwatch:
@@ -46,8 +42,11 @@ management:
         enabled: false
 
 custom:
-  web-socket-relay-use-ssl: false
+  internal-broker: true
+  sharing-queue: ${TODO_SHARING_QUEUE_NAME:stratospheric-todo-sharing}
   auto-confirm-collaborations: true
-  provide-test-todo-controller: true
+  web-socket-relay-use-ssl: false
+  provide-test-todo-controller: false
   use-cognito-as-identity-provider: false
+  confirm-email-from-address: ${NO_REPLY_EMAIL:noreply@stratospheric.dev}
   environment: local

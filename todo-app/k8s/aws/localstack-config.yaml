@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: localstack-config
+  labels:
+    app: localstack
+data:
+  SERVICES: "sns,sqs,ses,dynamodb"
+  DEBUG: "1"
+  LS_LOG: "trace"

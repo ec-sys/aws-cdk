@@ -16,7 +16,7 @@ spring:
             clientName: todo-spring-boot
         provider:
           cognito:
-            issuerUri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4
+            issuerUri: :https://cognito-idp.us-east-1.amazonaws.com/us-east-1_T7GTAxqF4
 #  security:
 #    oauth2:
 #      client:

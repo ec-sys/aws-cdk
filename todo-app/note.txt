@@ -175,3 +175,5 @@ tar xzf apache-activemq-5.17.0-bin.tar.gz -C /opt
 tar xzf apache-activemq-5.17.0-bin.tar.gz -C /opt
 
 https://viblo.asia/p/tao-ung-dung-chat-don-gian-voi-spring-boot-va-websocket-naQZR1DjKvx
+
+docker build --tag longdd90jp/aws-esc:todo-app.1.2 .

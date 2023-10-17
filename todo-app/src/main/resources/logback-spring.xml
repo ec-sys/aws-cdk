@@ -26,6 +26,12 @@
     </root>
   </springProfile>
 
+  <springProfile name="k8s">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+    </root>
+  </springProfile>
+
   <springProfile name="aws">
     <root level="INFO">
       <appender-ref ref="JSON"/>

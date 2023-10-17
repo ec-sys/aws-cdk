@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-config
+  labels:
+    app: keycloak
+data:
+  KEYCLOAK_ADMIN: keycloak
+  KEYCLOAK_ADMIN_PASSWORD: keycloak
+  DB_VENDOR: h2

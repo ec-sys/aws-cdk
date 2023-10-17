@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample  # Sets Deployment name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+  template:
+    metadata:
+      labels:
+        app: sample
+    spec:
+      containers:
+        - name: sample
+          image: gcr.io/google-samples/hello-app:1.0 # Sets Image
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8080  # Exposes container port
+              name: "app-port"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample # Sets service name
+  labels:
+    app: sample # Labels and Selectors
+spec:
+  type: ClusterIP # Sets service type
+  ports:
+    - name: app-port
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: sample
