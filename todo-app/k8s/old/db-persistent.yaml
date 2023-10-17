@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  # name of pv
+  name: db-pv
+  labels:
+    name: db-pv
+spec:
+  # class name for use in pvc
+  storageClassName: db-pv-todo-app
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    # data store in cluster
+    path: "/data/pv0002/"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  # name of pvc
+  name: db-pvc-todo-app
+  labels:
+    name: db-pvc-todo-app
+spec:
+  # class name of pv using in claim
+  storageClassName: db-pv-todo-app
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

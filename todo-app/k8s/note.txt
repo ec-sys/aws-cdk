@@ -1,0 +1,5 @@
+kubectl create namespace todo-app
+
+kubectl apply -f db-persistent.yaml -n todo-app
+
+https://www.airplane.dev/blog/deploy-postgres-on-kubernetes
