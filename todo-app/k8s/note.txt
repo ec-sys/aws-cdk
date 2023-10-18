@@ -15,6 +15,7 @@ kubectl apply -f localstack-deployment.yaml -n todo-app
 kubectl apply -f keycloak-config.yaml -n todo-app
 kubectl apply -f keycloak-deployment.yaml -n todo-app
 
+kubectl apply -f todo-app-deployment.yaml -n todo-app
 kubectl apply -f todo-ingress.yaml -n todo-app
 
 kubectl expose service keycloak --port=8080 --target-port=8080 -n todo-app
@@ -30,3 +31,5 @@ kubectl apply -f sample-deployment.yaml -n todo-app
 
 
 kubectl logs todo-app-77dbd6d487-vdkfz --all-containers=true -n todo-app
+
+minikube service todo-app --url  -n todo-app
