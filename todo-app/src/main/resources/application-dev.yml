@@ -15,7 +15,12 @@ spring:
             scope: openid
         provider:
           cognito:
-            issuerUri: http://localhost:8080/realms/stratospheric
+            issuerUri: http://localhost:8888/auth/realms/stratospheric
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+
   thymeleaf:
     cache: false
 #    prefix: file:src/main/resources/templates/
@@ -46,6 +51,7 @@ management:
         enabled: false
 
 custom:
+  internal-broker: true
   web-socket-relay-use-ssl: false
   auto-confirm-collaborations: true
   provide-test-todo-controller: true
