@@ -11,7 +11,7 @@ const client = new DynamoDBClient({});
 
 const dynamo = DynamoDBDocumentClient.from(client);
 
-const tableName = "http-crud-tutorial-items";
+const tableName = "products";
 
 export const handler = async (event, context) => {
   let body;
@@ -51,7 +51,8 @@ export const handler = async (event, context) => {
         body = body.Items;
         break;
       case "PUT /items":
-        let requestJSON = JSON.parse(event.body);
+        // let requestJSON = JSON.parse(event.body);
+        let requestJSON = event.body;
         await dynamo.send(
             new PutCommand({
               TableName: tableName,
