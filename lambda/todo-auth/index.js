@@ -7,7 +7,17 @@ import {
   DeleteCommand,
 } from "@aws-sdk/lib-dynamodb";
 
-const client = new DynamoDBClient({});
+const credentials = {
+  accessKeyId: 'AKIA3NQ4ZZQE4PYSADBX',
+  secretAccessKey: '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'
+}
+
+const config = {
+  region: 'us-east-1',
+  credentials,
+}
+
+const client = new DynamoDBClient(config);
 
 const dynamo = DynamoDBDocumentClient.from(client);
 
