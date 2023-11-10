@@ -1,0 +1,25 @@
+version: '2'
+
+networks:
+  todo-app-tier:
+    driver: bridge
+
+services:
+  redis:
+    image: 'bitnami/redis:7.0.7'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - todo-app-tier
+    ports:
+      - 6379:6379
+  mysql:
+    image: 'bitnami/mysql:8.0'
+    environment:
+      - MYSQL_ROOT_USER=admin
+      - MYSQL_ROOT_PASSWORD=root12345
+      - MYSQL_DATABASE=todo_db
+    networks:
+      - todo-app-tier
+    ports:
+      - 3306:3306
