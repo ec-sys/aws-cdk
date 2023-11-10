@@ -1,12 +1,66 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import {
-  DynamoDBDocumentClient,
-  ScanCommand,
-  PutCommand,
-  GetCommand,
-  DeleteCommand,
-} from "@aws-sdk/lib-dynamodb";
+import axios from 'axios';
+import { createClient } from 'redis';
+import mysql from 'mysql2/promise';
 
+import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm"; // ES Modules import
+
+export const handler = async (event) => {
+  /*
+  try {
+    const redisOptions = {
+      host: 'todo-app-cluster.hcevyb.clustercfg.use1.cache.amazonaws.com',
+      port: 6379
+    }
+
+    const client =  createClient({url: 'redis://todo-app-cluster.hcevyb.clustercfg.use1.cache.amazonaws.com:6379'});
+    client.on('error', err => console.log('Redis Client Error', err));
+    client.on('connect', function(result) {
+      console.log('connected');
+    });
+    await client.connect();
+
+    console.log('connect redis ok');
+  } catch (error) {
+    console.log('error redis');
+    console.log(error);
+  }
+
+  try {
+	  const res = await axios.get(`https://www.boredapi.com/api/activity`);
+	  console.log(res.data);
+  } catch (error) {
+    console.log('error axios');
+    console.log(error);
+  }
+  */
+  try {
+    /*
+    const conn = await mysql.createConnection({
+      host: 'todo-app-db.cjcam4zvgp9s.us-east-1.rds.amazonaws.com',
+      user: 'admin',
+      password: 'root12345',
+      database: 'todo_db'
+    });
+    console.log("Connected!");
+    */
+    /*
+    getParameterFromSystemManager(function() {
+      console.log('done');
+      context.done(null, 'Hello from Lambda');
+    });
+    */
+    await getParameter("TODO_APP_MYSQL_HOST");
+  } catch (error) {
+    console.log('error axios');
+    console.log(error);
+  }
+  // TODO implement
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify('Hello from Lambda!'),
+  };
+  return response;
+};
 const credentials = {
   accessKeyId: 'AKIA3NQ4ZZQE4PYSADBX',
   secretAccessKey: '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'
@@ -16,78 +70,39 @@ const config = {
   region: 'us-east-1',
   credentials,
 }
+const client = new SSMClient(config);
 
-const client = new DynamoDBClient(config);
+// function getParameterFromSystemManager(callback) {
+//     const client = new SSMClient({
+//       region: "us-east-1",
+//     });
 
-const dynamo = DynamoDBDocumentClient.from(client);
+//     var params = {
+//         Name: 'TODO_APP_MYSQL_HOST',
+//         WithDecryption: false
+//     };
 
-const tableName = "products";
+//     console.log('in the getParameterFromSystemManager function');
+//     const request = new GetParameterRequest(params);
+//     const response = await client.send(request);
+//     console.log(response);
 
-export const handler = async (event, context) => {
-  let body;
-  let statusCode = 200;
-  const headers = {
-    "Content-Type": "application/json",
+//     // var request = client.getParameter(params, function(err, data) {
+//     //     if (err) console.log(err, err.stack); // an error occurred
+//     //     else console.log(data); // successful response
+
+//     //     callback();
+//     // });
+// }
+
+async function getParameter(parameterName) {
+  console.log(parameterName);
+  const params = {
+    Name: parameterName,
+    WithDecryption: false
   };
-
-  try {
-    switch (event.routeKey) {
-      case "DELETE /items/{id}":
-        await dynamo.send(
-            new DeleteCommand({
-              TableName: tableName,
-              Key: {
-                id: event.pathParameters.id,
-              },
-            })
-        );
-        body = `Deleted item ${event.pathParameters.id}`;
-        break;
-      case "GET /items/{id}":
-        body = await dynamo.send(
-            new GetCommand({
-              TableName: tableName,
-              Key: {
-                id: event.pathParameters.id,
-              },
-            })
-        );
-        body = body.Item;
-        break;
-      case "GET /items":
-        body = await dynamo.send(
-            new ScanCommand({ TableName: tableName })
-        );
-        body = body.Items;
-        break;
-      case "PUT /items":
-        // let requestJSON = JSON.parse(event.body);
-        let requestJSON = event.body;
-        await dynamo.send(
-            new PutCommand({
-              TableName: tableName,
-              Item: {
-                id: requestJSON.id,
-                price: requestJSON.price,
-                name: requestJSON.name,
-              },
-            })
-        );
-        body = `Put item ${requestJSON.id}`;
-        break;
-      default:
-        throw new Error(`Unsupported route: "${event.routeKey}"`);
-    }
-  } catch (err) {
-    statusCode = 400;
-    body = err.message;
-  } finally {
-    body = JSON.stringify(body);
-  }
-
-  return {
-    statusCode,
-    body,
-    headers,
-  };
-};
+  const command = new GetParameterCommand(params);
+  const response = await client.send(command);
+  console.log('data');
+  console.log(response);
+}

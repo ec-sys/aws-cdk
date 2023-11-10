@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "locally": "node -e \"console.log(require('./index').handler(require('./event.json')));\""
+    "locally": "node test.js"
   },
   "author": "",
   "license": "ISC",
