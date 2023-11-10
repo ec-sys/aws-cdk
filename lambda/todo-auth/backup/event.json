@@ -1,3 +1,8 @@
 {
-  "routeKey" : "GET /items"
+  userInfo: {
+    id: 1,
+    name: 'longdd90',
+    email: 'long.dang@drjoy.vn'
+  },
+  jti: tokenId
 }
