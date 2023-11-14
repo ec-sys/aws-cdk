@@ -24,17 +24,12 @@ spec:
             - name: http
               containerPort: 8085
 ---
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: todo-app
-  labels:
-    app: todo-app
+  name: todo-service
 spec:
-  ports:
-    - name: http
-      port: 8085
-      targetPort: 8085
   selector:
     app: todo-app
-  type: NodePort
+  ports:
+    - port: 8085

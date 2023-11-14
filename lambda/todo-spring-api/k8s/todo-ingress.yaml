@@ -3,16 +3,16 @@ kind: Ingress
 metadata:
   name: todo-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /?(.*)
-            pathType: Prefix
+          - path: /api/?(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
-                name: todo-app
+                name: todo-service
                 port:
                   number: 8085
