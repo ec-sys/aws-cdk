@@ -186,3 +186,8 @@ docker build --tag longdd90jp/aws-esc:todo-api.0.1 .
 eksctl create cluster --name my-cluster --region us-east-2 --version 1.27 --vpc-private-subnets subnet-ExampleID1,subnet-ExampleID2 --without-nodegroup
 
 eksctl create cluster -f cluster.yaml
+
+
+kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0 -n todo-app
+
+kubectl expose deployment web --type=NodePort --port=8080 -n todo-app

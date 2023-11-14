@@ -37,4 +37,4 @@ spec:
       targetPort: 8085
   selector:
     app: todo-app
-  type: ClusterIP
+  type: NodePort
