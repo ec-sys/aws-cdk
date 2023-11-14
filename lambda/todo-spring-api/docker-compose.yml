@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:12.9
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=stratospheric
+      - POSTGRES_PASSWORD=stratospheric
+      - POSTGRES_DB=stratospheric
+  rabbitmq:
+    image: longdd90jp/rabbitmq:1.0
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 5673:61613
+  localstack:
+    image: localstack/localstack:2.1.0
+    ports:
+      - 4566:4566
+      - 8000:8000
+      - 4569:4569
+      - 8055:8055
+      - 4572:4572
+    environment:
+      - SERVICES=sns,sqs,ses,dynamodb
+      - DEBUG=1
+      - LS_LOG=trace
+    volumes:
+      - ./src/test/resources/localstack/local-aws-infrastructure.sh:/docker-entrypoint-initaws.d/init.sh
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0.0-legacy
+    ports:
+      - 8888:8080
+    environment:
+      - KEYCLOAK_USER=keycloak
+      - KEYCLOAK_PASSWORD=keycloak
+      - DB_VENDOR=h2
+      - JAVA_OPTS=-Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/stratospheric-realm.json
+    volumes:
+      - ./src/test/resources/keycloak/stratospheric-realm.json:/tmp/stratospheric-realm.json
