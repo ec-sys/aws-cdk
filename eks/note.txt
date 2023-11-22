@@ -1,0 +1,33 @@
+eksctl create cluster -f cluster-create.yaml
+
+kubectl create namespace game-2048
+kubectl apply -f 2048_full.yaml
+
+1.kubectl edit configmap aws-auth -n kube-system
+2.
+--------------
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::784965684233:role/eksctl-basic-cluster-nodegroup-ng--NodeInstanceRole-a5jB9EOg9Sch
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::784965684233:root
+      groups:
+      - system:masters
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-11-22T16:40:52Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1527"
+  uid: 1bc8aa1d-2449-46d0-94b7-a25fa967787a
+--------------
+https://stackoverflow.com/questions/70787520/your-current-user-or-role-does-not-have-access-to-kubernetes-objects-on-this-eks
