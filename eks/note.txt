@@ -1,10 +1,11 @@
 eksctl create cluster -f cluster-create.yaml
+eksctl delete cluster -f cluster-create.yaml
 
 kubectl create namespace game-2048
 kubectl apply -f 2048_full.yaml
 
 1.kubectl edit configmap aws-auth -n kube-system
-2.
+2.update để view đc trong aws-console
 --------------
 # Please edit the object below. Lines beginning with a '#' will be ignored,
 # and an empty file will abort the edit. If an error occurs while saving this file will be
@@ -31,3 +32,27 @@ metadata:
   uid: 1bc8aa1d-2449-46d0-94b7-a25fa967787a
 --------------
 https://stackoverflow.com/questions/70787520/your-current-user-or-role-does-not-have-access-to-kubernetes-objects-on-this-eks
+
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+aws iam create-policy \
+    --policy-name eks-alb-controller-policy \
+    --policy-document file://iam_policy.json
+
+eksctl utils associate-iam-oidc-provider --region=us-east-2 --cluster=basic-cluster --approve
+
+eksctl create iamserviceaccount \
+  --cluster=basic-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name eks-alb-controller-role \
+  --attach-policy-arn=arn:aws:iam::784965684233:policy/eks-alb-controller-policy \
+  --approve
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=baisc-cluster \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set region=us-east-2
+
+update lại SG theo SG của load-balancer-controller để có thể targetGroup healthy
